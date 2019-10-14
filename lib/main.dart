@@ -150,6 +150,7 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
     providerData.useSsl = _preferences.getBool('useSsl');
     if (providerData.useSsl == null) {
       providerData.useSsl = Settings.ssls[Settings.connectionIndex];
+      providerData.useSsl = false;
     }
     print('loadDataFromDisk: useSsl set to ${providerData.useSsl}');
     // call setState here to set the actual list of items and rebuild the widget.
@@ -157,12 +158,14 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
     providerData.hassUrl = _preferences.getString('hassUrl');
     if (providerData.hassUrl == null || providerData.hassUrl.length < 1) {
       providerData.hassUrl = Settings.urls[Settings.connectionIndex];
+      providerData.hassUrl = '';
     }
     print('loadDataFromDisk: hassUrl set to ${providerData.hassUrl}');
 
     providerData.hassToken = _preferences.getString('hassToken');
     if (providerData.hassToken == null || providerData.hassToken.length < 1) {
       providerData.hassToken = Settings.tokens[Settings.connectionIndex];
+      providerData.hassToken = '';
     }
     print('loadDataFromDisk: hassToken set to ${providerData.hassToken}');
 

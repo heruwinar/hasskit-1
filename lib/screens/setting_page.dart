@@ -273,13 +273,13 @@ class _HassConnectState extends State<HassConnect> {
                     },
                   )
                 : Container(),
-            (!providerData.serverConnected && Settings.urls[0].length > 0)
+            (!providerData.serverConnected && Settings.urls.length >= 1)
                 ? MaterialButton(
                     minWidth: double.infinity,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6)),
                     child: Text(
-                      Settings.urls[0],
+                      'Demo Sever: ${Settings.urls[0]}',
                       style: Styles.textButton,
                     ),
                     elevation: 1,
@@ -301,13 +301,13 @@ class _HassConnectState extends State<HassConnect> {
                     },
                   )
                 : Container(),
-            (!providerData.serverConnected && Settings.urls[1].length > 0)
+            (!providerData.serverConnected && Settings.urls.length >= 2)
                 ? MaterialButton(
                     minWidth: double.infinity,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6)),
                     child: Text(
-                      Settings.urls[1],
+                      'Demo Sever: ${Settings.urls[1]}',
                       style: Styles.textButton,
                     ),
                     elevation: 1,
@@ -329,13 +329,13 @@ class _HassConnectState extends State<HassConnect> {
                     },
                   )
                 : Container(),
-            (!providerData.serverConnected && Settings.urls[2].length > 0)
+            (!providerData.serverConnected && Settings.urls.length >= 3)
                 ? MaterialButton(
                     minWidth: double.infinity,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6)),
                     child: Text(
-                      Settings.urls[2],
+                      'Demo Sever: ${Settings.urls[2]}',
                       style: Styles.textButton,
                     ),
                     elevation: 1,

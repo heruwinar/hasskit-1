@@ -28,7 +28,9 @@ class RoomTab extends StatelessWidget {
               entities: entityList,
               assetImage: Settings.getRoomImage(position));
         },
-        itemCount: providerData.getCardsMapLength() - 1,
+        itemCount: providerData.getCardsMapLength() - 1 > 0
+            ? providerData.getCardsMapLength() - 1
+            : 0,
       ),
     );
   }

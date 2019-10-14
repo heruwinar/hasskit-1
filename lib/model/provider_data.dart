@@ -66,7 +66,7 @@ class ProviderData with ChangeNotifier {
     notifyListeners();
   }
 
-  String _connectionStatus = 'Waiting for connection...';
+  String _connectionStatus = '';
   String get connectionStatus => _connectionStatus;
   set connectionStatus(String val) {
     _connectionStatus = val;
@@ -100,7 +100,7 @@ class ProviderData with ChangeNotifier {
     notifyListeners();
   }
 
-  bool _autoConnect = true;
+  bool _autoConnect = false;
   bool get autoConnect => _autoConnect;
   set autoConnect(bool val) {
     _autoConnect = val;
