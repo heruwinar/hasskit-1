@@ -37,7 +37,9 @@ class Entity {
   }
 
   bool get isBackgroundOn {
-    if (entityType != EntityType.lightSwitches) {
+    if (entityType != EntityType.lightSwitches &&
+        entityType != EntityType.climateFans &&
+        entityType != EntityType.mediaPlayers) {
       return false;
     }
     var stateLower = state.toLowerCase();
