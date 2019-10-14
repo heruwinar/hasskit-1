@@ -12,6 +12,8 @@ import 'package:hasskit/utils/WebSocketConnection.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'utils/Settings.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
+//import 'package:flutter_cupertino_localizations/flutter_cupertino_localizations.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([
@@ -31,11 +33,17 @@ class MyMaterialApp extends StatelessWidget {
   Widget build(BuildContext context) {
     providerData = Provider.of<ProviderData>(context);
     return MaterialApp(
-      supportedLocales: [
-        const Locale('en', 'US'), // English
-        const Locale('vn', 'VN'), // vietnam
-        // ... other locales the app supports
-      ],
+//      localizationsDelegates: [
+//        // ... app-specific localization delegate[s] here
+//        GlobalMaterialLocalizations.delegate,
+//        GlobalWidgetsLocalizations.delegate,
+//        GlobalCupertinoLocalizations.delegate,
+//      ],
+//      supportedLocales: [
+//        const Locale('en'), // English
+//        const Locale('vn'), // Vietnam
+//        // ... other locales the app supports
+//      ],
       title: 'HassKit',
       home: HassKitHome(),
     );
