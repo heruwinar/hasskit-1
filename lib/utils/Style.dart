@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 abstract class Styles {
   static const TextStyle textEntityGroupType = TextStyle(
     color: Color.fromRGBO(255, 255, 255, 0.8),
-    fontSize: 32,
+    fontSize: 22,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
   );
