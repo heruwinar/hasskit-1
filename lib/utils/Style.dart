@@ -8,48 +8,48 @@ import 'package:flutter/widgets.dart';
 abstract class Styles {
   static const TextStyle textEntityGroupType = TextStyle(
     color: Color.fromRGBO(255, 255, 255, 0.8),
-    fontSize: 14,
+    fontSize: 16,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
   );
 
   static const TextStyle textEntityNameActive = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 0.8),
-    fontSize: 12,
+    fontSize: 14,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
   );
 
   static const TextStyle textEntityNameInActive = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 0.5),
-    fontSize: 12,
+    fontSize: 14,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
   );
 
   static const TextStyle textEntityStatus = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 0.5),
-    fontSize: 12,
+    fontSize: 14,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
   );
   static const TextStyle textEntityStatusSensorActive = TextStyle(
     color: Color.fromRGBO(255, 0, 0, 0.8),
-    fontSize: 12,
+    fontSize: 14,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
   );
 
   static const TextStyle inputText = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 1),
-    fontSize: 12,
+    fontSize: 14,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.normal,
   );
 
   static const TextStyle textButton = TextStyle(
     color: Color.fromRGBO(0, 128, 255, 0.8),
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: FontWeight.bold,
   );
 

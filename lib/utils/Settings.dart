@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:hasskit/model/Entity.dart';
@@ -46,6 +47,13 @@ abstract class Settings {
       random.nextInt(256),
     );
     return color;
+  }
+
+  static double get textScaleFactor {
+    if (Platform.isAndroid) {
+      return 0.8;
+    }
+    return 1;
   }
 
   static int connectionIndex = 0;

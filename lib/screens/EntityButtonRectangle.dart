@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hasskit/model/Entity.dart';
 import 'package:hasskit/model/ProviderData.dart';
+import 'package:hasskit/utils/Settings.dart';
 import 'package:hasskit/utils/Style.dart';
 
 class EntityButtonRectangle extends StatefulWidget {
@@ -60,7 +61,7 @@ class _EntityButtonRectangleState extends State<EntityButtonRectangle> {
                       child: Text(
                         '${widget.entity.friendlyName}',
                         style: Styles.textEntityNameActive,
-                        textScaleFactor: 1,
+                        textScaleFactor: Settings.textScaleFactor,
                       ),
                     ),
                     Padding(
@@ -69,7 +70,7 @@ class _EntityButtonRectangleState extends State<EntityButtonRectangle> {
                       child: Text(
                         '${widget.entity.state}',
                         style: Styles.textEntityNameActive,
-                        textScaleFactor: 1,
+                        textScaleFactor: Settings.textScaleFactor,
                       ),
                     ),
                   ],

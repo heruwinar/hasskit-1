@@ -120,9 +120,12 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
               return CupertinoTabView(
                 builder: (context) {
                   return CupertinoPageScaffold(
-                    child:
-                        providerData.serverConnected ? HomePage() : SpinKit(),
-//                  child: HomeTab(),
+                    child: (!providerData.autoConnect ||
+                            providerData.hassUrl == null ||
+                            providerData.hassUrl.length < 1)
+                        ? SpinKit()
+                        : HomePage(),
+//                    child: HomePage(),
                   );
                 },
               );
@@ -130,7 +133,12 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
               return CupertinoTabView(
                 builder: (context) {
                   return CupertinoPageScaffold(
-                    child: providerData.serverConnected ? RoomTab() : SpinKit(),
+                    child: (!providerData.autoConnect ||
+                            providerData.hassUrl == null ||
+                            providerData.hassUrl.length < 1)
+                        ? SpinKit()
+                        : RoomTab(),
+//                    child: RoomTab(),
                   );
                 },
               );

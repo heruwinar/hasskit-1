@@ -25,6 +25,10 @@ class SpinKit extends StatelessWidget {
             style: Styles.textEntityNameInActive,
           ),
         ),
+//        Center(
+//          child: Text(
+//              'hassUrl == null ${providerData.hassUrl == null} length < 1 ${providerData.hassUrl.length < 1} autoConnect ${providerData.autoConnect}'),
+//        ),
       ],
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hasskit/model/Entity.dart';
+import 'package:hasskit/model/ProviderData.dart';
 import 'package:hasskit/utils/Settings.dart';
 import 'package:hasskit/utils/Style.dart';
 
@@ -55,14 +56,24 @@ class EntityButtonSquare extends StatelessWidget {
                 ),
                 Expanded(
                   child: FittedBox(
-                    child: entity.state.contains('...')
-                        ? SpinKitThreeBounce(
-                            color: entity.isBackgroundOn == true
-                                ? Styles.entityIconActive
-                                : Styles.entityIconInActive,
-                            size: 100,
-                          )
-                        : Container(),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: entity.state.contains('...')
+                          ? SpinKitThreeBounce(
+                              color: entity.isBackgroundOn == true
+                                  ? Styles.entityIconActive
+                                  : Styles.entityIconInActive,
+                              size: 100,
+                            )
+                          : !providerData.serverConnected
+                              ? SpinKitFadingCircle(
+                                  color: entity.isBackgroundOn == true
+                                      ? Styles.entityIconActive
+                                      : Styles.entityIconInActive,
+                                  size: 100,
+                                )
+                              : Container(),
+                    ),
                   ),
                 ),
               ],
@@ -79,7 +90,7 @@ class EntityButtonSquare extends StatelessWidget {
                       : Styles.textEntityNameInActive,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-                  textScaleFactor: 1,
+                  textScaleFactor: Settings.textScaleFactor,
                 ),
               )),
           Expanded(
@@ -91,7 +102,7 @@ class EntityButtonSquare extends StatelessWidget {
                     : Styles.textEntityStatus,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
-                textScaleFactor: 1,
+                textScaleFactor: Settings.textScaleFactor,
               )),
         ],
       ),
