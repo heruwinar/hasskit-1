@@ -255,24 +255,6 @@ class _HassConnectState extends State<HassConnect> {
               ],
             ),
             SizedBox(height: 8),
-            providerData.serverConnected
-                ? MaterialButton(
-                    minWidth: double.infinity,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6)),
-                    child: Text(
-                      'Refresh Data',
-                      style: Styles.textButton,
-                    ),
-                    elevation: 1,
-                    color: Styles.white80,
-                    onPressed: () {
-                      var outMsg =
-                          '{\"id\": ${providerData.socketId}, \"type\": \"get_states\"}';
-                      sockets.send(outMsg);
-                    },
-                  )
-                : Container(),
             (!providerData.serverConnected && Settings.urls.length >= 1)
                 ? MaterialButton(
                     minWidth: double.infinity,

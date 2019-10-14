@@ -48,6 +48,7 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
   Timer timer1;
   Timer timer5;
   Timer timer10;
+  Timer timer30;
 
   AppLifecycleState _notification;
   @override
@@ -68,6 +69,8 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
         Timer.periodic(Duration(seconds: 5), (Timer t) => timer5Callback());
     timer10 =
         Timer.periodic(Duration(seconds: 10), (Timer t) => timer10Callback());
+    timer30 =
+        Timer.periodic(Duration(seconds: 30), (Timer t) => timer30Callback());
     WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
@@ -205,11 +208,13 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
     updateCameraThumbnails();
   }
 
-  timer5Callback() {
+  timer5Callback() {}
+
+  timer10Callback() {
     initCommunication();
   }
 
-  timer10Callback() {
+  timer30Callback() {
     if (providerData.serverConnected) {
       var outMsg = {"id": providerData.socketId, "type": "get_states"};
       var outMsgEncoded = json.encode(outMsg);

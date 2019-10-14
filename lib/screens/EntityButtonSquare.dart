@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hasskit/model/entity.dart';
+import 'package:hasskit/utils/settings.dart';
 import 'package:hasskit/utils/style.dart';
 
 class EntityButtonSquare extends StatelessWidget {
@@ -21,12 +23,27 @@ class EntityButtonSquare extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 FittedBox(
-                  child: Icon(
-                    entity.mdiIcon,
-                    size: 100,
-                    color: entity.isIconOn == true
-                        ? Styles.entityIconActive
-                        : Styles.entityIconInActive,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          color: entity.entityType == EntityType.others &&
+                                  entity.isIconOn
+                              ? Colors.green
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        width: 100,
+                        height: 100,
+                      ),
+                      Icon(
+                        entity.mdiIcon,
+                        size: 100,
+                        color: entity.isIconOn == true
+                            ? Styles.entityIconActive
+                            : Styles.entityIconInActive,
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(
@@ -62,8 +79,9 @@ class EntityButtonSquare extends StatelessWidget {
               flex: 1,
               child: Text(
                 entity.stateCap,
-//                    entity.entityId,
-                style: Styles.textEntityStatus,
+                style: entity.entityType == EntityType.others && entity.isIconOn
+                    ? Styles.textEntityStatusSensorActive
+                    : Styles.textEntityStatus,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 textScaleFactor: 1,

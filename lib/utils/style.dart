@@ -33,8 +33,8 @@ abstract class Styles {
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
   );
-  static const TextStyle textEntityStatusSensor = TextStyle(
-    color: Color.fromRGBO(255, 0, 0, 0.5),
+  static const TextStyle textEntityStatusSensorActive = TextStyle(
+    color: Color.fromRGBO(255, 0, 0, 0.8),
     fontSize: 12,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
