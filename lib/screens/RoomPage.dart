@@ -31,7 +31,7 @@ class RoomPage extends StatelessWidget {
       child: CustomScrollView(
         slivers: <Widget>[
           CupertinoSliverNavigationBar(
-            largeTitle: Text(title),
+            largeTitle: Text(title.toString().replaceAll('null', '')),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,

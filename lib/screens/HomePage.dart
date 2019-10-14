@@ -22,6 +22,12 @@ class HomePage extends StatelessWidget {
 //      print('entity.entityId ${entity.entityId}');
         entities.add(entity);
       }
+      for (int i = 0; i < providerData.badges.length; i++) {
+        var entity = providerData.badges[i];
+//      print('entityId $entityId');
+//      print('entity.entityId ${entity.entityId}');
+        entities.add(entity);
+      }
     }
 
     var lightSwitches =

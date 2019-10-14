@@ -184,15 +184,21 @@ class ProviderData with ChangeNotifier {
 //      }
       List<dynamic> badgesParse = viewParse['badges'];
       List<Entity> tempListView = [];
-      print(
-          '\nviewNumber $viewNumber badgesParse.length ${badgesParse.length}');
+//      print(
+//          '\nviewNumber $viewNumber badgesParse.length ${badgesParse.length}');
 
       List<Entity> tempListEntities = [];
       for (var badgeParse in badgesParse) {
 //        print('badgeParse $badgeParse');
         entityValidationAdd(badgeParse.toString(), tempListEntities);
       }
-      badges = tempListEntities;
+
+      for (var entity in tempListEntities) {
+        if (!badges.contains(entity)) {
+          badges.add(entity);
+        }
+      }
+//      print('badges.length ${badges.length}');
 
       List<dynamic> cardsParse = viewParse['cards'];
       print('viewNumber $viewNumber cardsParse.length ${cardsParse.length}');
@@ -203,10 +209,10 @@ class ProviderData with ChangeNotifier {
 //          titleCard = 'Unnamed $cardNumber';
 //        }
         var type = cardParse['type'];
-//        print('cardParse title $title type $type');
+        print('cardParse title $title type $type');
 
         //entities type = 1 page view
-        if (type == 'entities') {
+        if (type == 'entities' || type == 'glance') {
           List<dynamic> entitiesParse = cardParse['entities'];
           List<Entity> tempListEntities = [];
 
@@ -235,9 +241,9 @@ class ProviderData with ChangeNotifier {
     }
 
     print('\nbadges.length ${badges.length}');
-    for (int i = 0; i < badges.length; i++) {
-      print('  - ${i + 1}. ${badges[i].entityId}');
-    }
+//    for (int i = 0; i < badges.length; i++) {
+//      print('  - ${i + 1}. ${badges[i].entityId}');
+//    }
 
     print('\ncards.length ${cards.length}');
 //    var cardsKeys = cards.keys.toList();
@@ -286,7 +292,7 @@ class ProviderData with ChangeNotifier {
     var decode = json.decode(message);
     var entityId = decode['event']['data']['entity_id'];
 //    var oldStateEntityId = decode['event']['data']['old_state']['entity_id'];
-    var oldStateState = decode['event']['data']['old_state']['state'];
+//    var oldStateState = decode['event']['data']['old_state']['state'];
 //    var newStateEntityId = decode['event']['data']['new_state']['entity_id'];
     var newStateState = decode['event']['data']['new_state']['state'];
     var newIcon = decode['event']['data']['new_state']['attributes']['icon'];
