@@ -83,7 +83,7 @@ class _HassConnectState extends State<HassConnect> {
             Row(
               children: <Widget>[
                 Expanded(
-                  child: TextFormField(
+                  child: TextField(
                     autofocus: false,
                     style: Styles.inputText,
                     controller: addressController,
@@ -199,7 +199,7 @@ class _HassConnectState extends State<HassConnect> {
             SizedBox(
               height: 8,
             ),
-            TextFormField(
+            TextField(
               style: Styles.inputText,
               controller: tokenController,
               minLines: 2,
@@ -213,7 +213,6 @@ class _HassConnectState extends State<HassConnect> {
                 ),
               ),
               onChanged: (val) {
-                print('tokenController onChanged $val');
                 sockets.reset();
                 providerData.autoConnect = false;
                 providerData.hassToken = val.trim();

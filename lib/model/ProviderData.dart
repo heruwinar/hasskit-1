@@ -100,7 +100,7 @@ class ProviderData with ChangeNotifier {
     notifyListeners();
   }
 
-  bool _autoConnect = true;
+  bool _autoConnect = false;
   bool get autoConnect => _autoConnect;
   set autoConnect(bool val) {
     _autoConnect = val;

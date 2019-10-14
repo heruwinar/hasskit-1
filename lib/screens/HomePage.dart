@@ -6,7 +6,7 @@ import 'package:hasskit/screens/SliverGridEntity.dart';
 import 'package:hasskit/utils/Settings.dart';
 import 'SliverListGroupTitle.dart';
 
-class HomeTab extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String title = '';

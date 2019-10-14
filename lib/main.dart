@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hasskit/Screens/HomeTab.dart';
-import 'package:hasskit/Screens/RoomTab.dart';
-import 'package:hasskit/Screens/SettingTab.dart';
 import 'package:hasskit/model/ProviderData.dart';
+import 'package:hasskit/screens/HomePage.dart';
+import 'package:hasskit/screens/RoomTab.dart';
+import 'package:hasskit/screens/SettingPage.dart';
 import 'package:hasskit/screens/SpinKit.dart';
 import 'package:hasskit/utils/WebSocketConnection.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +31,6 @@ class MyMaterialApp extends StatelessWidget {
   Widget build(BuildContext context) {
     providerData = Provider.of<ProviderData>(context);
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'HassKit',
       home: HassKitHome(),
     );
@@ -44,7 +43,6 @@ class HassKitHome extends StatefulWidget {
 }
 
 class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
-  bool loadingData = false;
   Timer timer1;
   Timer timer5;
   Timer timer10;
@@ -109,7 +107,8 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
               return CupertinoTabView(
                 builder: (context) {
                   return CupertinoPageScaffold(
-                    child: providerData.serverConnected ? HomeTab() : SpinKit(),
+                    child:
+                        providerData.serverConnected ? HomePage() : SpinKit(),
 //                  child: HomeTab(),
                   );
                 },
@@ -126,7 +125,7 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
               return CupertinoTabView(
                 builder: (context) {
                   return CupertinoPageScaffold(
-                    child: SettingTab(),
+                    child: SettingPage(),
                   );
                 },
               );
@@ -134,7 +133,7 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
               return CupertinoTabView(
                 builder: (context) {
                   return CupertinoPageScaffold(
-                    child: HomeTab(),
+                    child: HomePage(),
                   );
                 },
               );
@@ -145,8 +144,7 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
   }
 
   loadDataFromDisk() async {
-    loadingData = true;
-    print('START loadingData $loadingData');
+    print('START loadingData');
 
     print('START loadDataFromDisk');
     var _preferences = await SharedPreferences.getInstance();
@@ -174,14 +172,14 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
     print('loadDataFromDisk: hassToken set to ${providerData.hassToken}');
 
     print('START initCommunication');
+
+    providerData.autoConnect = true;
     await initCommunication();
 
     print('START Future.delayed');
     await Future.delayed(const Duration(milliseconds: 1000));
 
-    setState(() {
-      loadingData = false;
-    });
+    setState(() {});
     print('END loadDataFromDisk');
   }
 
