@@ -8,7 +8,7 @@ import 'package:hasskit/utils/WebSocketConnection.dart';
 
 class Entity {
   final String friendlyName;
-  final String icon;
+  String icon;
   final String entityId;
   String state;
 
@@ -75,7 +75,6 @@ class Entity {
     }
 
     if (deviceName.contains('automation')) {
-      print(entityId);
       return 'mdi:home-automation';
     }
     if (deviceName.contains('cover')) {

@@ -138,7 +138,7 @@ class WebSocketConnection with ChangeNotifier {
         }
 
         _channel.sink.add(message);
-        print('SOCKET SEND: id $id type $type $message');
+//        print('SOCKET SEND: id $id type $type $message');
         providerData.socketIdIncrement();
       }
     }

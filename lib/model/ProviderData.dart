@@ -29,8 +29,8 @@ class ProviderData with ChangeNotifier {
   }
 
   void toggleStatus(Entity entity) {
-    print(
-        'entityId ${entity.entityId} friendlyName ${entity.friendlyName} icon ${entity.icon} getDefaultIcon ${entity.getDefaultIcon}');
+//    print(
+//        'entityId ${entity.entityId} friendlyName ${entity.friendlyName} icon ${entity.icon} getDefaultIcon ${entity.getDefaultIcon}');
     if (entity.entityType != EntityType.lightSwitches &&
         entity.entityType != EntityType.climateFans &&
         entity.entityType != EntityType.mediaPlayers) {
@@ -70,9 +70,9 @@ class ProviderData with ChangeNotifier {
   String get connectionStatus => _connectionStatus;
   set connectionStatus(String val) {
     _connectionStatus = val;
-    if (val != '') {
-      print('set connectionStatus to $val');
-    }
+//    if (val != '') {
+//      print('set connectionStatus to $val');
+//    }
     notifyListeners();
   }
 
@@ -289,10 +289,14 @@ class ProviderData with ChangeNotifier {
     var oldStateState = decode['event']['data']['old_state']['state'];
 //    var newStateEntityId = decode['event']['data']['new_state']['entity_id'];
     var newStateState = decode['event']['data']['new_state']['state'];
+    var newIcon = decode['event']['data']['new_state']['attributes']['icon'];
+
+//    print('newIcon $entityId : $newIcon');
+
 //    print('socketSubscribeEvents $entityId '
 //        '\noldStateEntityId $oldStateEntityId oldStateState $oldStateState'
 //        '\nnewStateEntityId $newStateEntityId newStateState $newStateState');
-    print('socketSubscribeEvents $entityId | $oldStateState => $newStateState');
+//    print('socketSubscribeEvents $entityId | $oldStateState => $newStateState');
 
     try {
       var entity = entities.firstWhere((e) => e.entityId == entityId,
@@ -300,6 +304,7 @@ class ProviderData with ChangeNotifier {
 
       if (entity != null) {
         entity.state = newStateState;
+        entity.icon = newIcon;
         notifyListeners();
       }
     } catch (e) {

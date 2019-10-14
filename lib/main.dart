@@ -82,7 +82,7 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
         Timer.periodic(Duration(seconds: 10), (Timer t) => timer10Callback());
     timer30 =
         Timer.periodic(Duration(seconds: 30), (Timer t) => timer30Callback());
-    WidgetsBinding.instance.addObserver(this);
+
     super.initState();
   }
 
