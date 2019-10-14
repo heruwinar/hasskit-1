@@ -157,7 +157,7 @@ class Entity {
     }
   }
 
-  void toggleState() {
+  toggleState() {
     var domain = entityId.split('.').first;
     var service = '';
     if (state == 'on' || state == 'turning on...') {
@@ -185,6 +185,15 @@ class Entity {
     var outMsgEncoded = json.encode(outMsg);
 //    print('outMsgEncoded $outMsgEncoded');
     sockets.send(outMsgEncoded);
+//    print('Toggle: $outMsgEncoded  ${Settings.dTHhMmSS}');
+//    await Future.delayed(const Duration(seconds: 10), () {});
+//
+//    outMsg = {"id": providerData.socketId, "type": "get_states"};
+//
+//    outMsgEncoded = json.encode(outMsg);
+////    print('outMsgEncoded $outMsgEncoded');
+//    sockets.send(outMsgEncoded);
+//    print('delayed: $outMsgEncoded ${Settings.dTHhMmSS})');
   }
 
   EntityType get entityType {

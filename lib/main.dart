@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -209,6 +210,10 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
   }
 
   timer10Callback() {
-//    updateCameraThumbnails();
+    if (providerData.serverConnected) {
+      var outMsg = {"id": providerData.socketId, "type": "get_states"};
+      var outMsgEncoded = json.encode(outMsg);
+      sockets.send(outMsgEncoded);
+    }
   }
 }

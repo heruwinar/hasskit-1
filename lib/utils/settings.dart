@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:hasskit/model/entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 enum EntityType {
   lightSwitches,
@@ -100,4 +101,6 @@ abstract class Settings {
       List<Entity> entities, EntityType entityType) {
     return entities.where((e) => e.entityType == entityType).toList();
   }
+
+  static String dTHhMmSS = DateFormat('kk:mm:ss').format(DateTime.now());
 }
