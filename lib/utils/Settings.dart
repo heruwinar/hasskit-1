@@ -51,7 +51,7 @@ abstract class Settings {
 
   static double get textScaleFactor {
     if (Platform.isAndroid) {
-      return 0.8;
+      return 0.75;
     }
     return 1;
   }
