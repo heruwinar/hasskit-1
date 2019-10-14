@@ -31,6 +31,11 @@ class MyMaterialApp extends StatelessWidget {
   Widget build(BuildContext context) {
     providerData = Provider.of<ProviderData>(context);
     return MaterialApp(
+      supportedLocales: [
+        const Locale('en', 'US'), // English
+        const Locale('vn', 'VN'), // vietnam
+        // ... other locales the app supports
+      ],
       title: 'HassKit',
       home: HassKitHome(),
     );
