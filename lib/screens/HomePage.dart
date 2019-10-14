@@ -76,7 +76,7 @@ class HomePage extends StatelessWidget {
           SliverGridEntity(
               entities: lightSwitches, crossAxisCount: 3, childAspectRatio: 1),
           SliverListGroupTitle(
-              entities: climateFans, title: 'Air Conditioners and Fans'),
+              entities: climateFans, title: 'Climates and Fans'),
           SliverGridEntity(
               entities: climateFans,
               crossAxisCount: 3,
@@ -89,14 +89,19 @@ class HomePage extends StatelessWidget {
               entities: mediaPlayers,
               crossAxisCount: 3,
               childAspectRatio: 8 / 8),
-          SliverListGroupTitle(entities: others, title: 'Sensors'),
-          SliverSafeArea(
-            bottom: true,
-            minimum: EdgeInsets.only(bottom: 100),
-            sliver: SliverGridEntity(
-              entities: others,
-              crossAxisCount: 3,
-              childAspectRatio: 8 / 8,
+          SliverListGroupTitle(entities: others, title: 'Accessories'),
+          SliverGridEntity(
+            entities: others,
+            crossAxisCount: 3,
+            childAspectRatio: 8 / 8,
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Container(
+                  height: 100,
+                ),
+              ],
             ),
           ),
         ],
