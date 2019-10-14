@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hasskit/model/entity.dart';
-import 'package:hasskit/utils/style.dart';
+import 'package:hasskit/model/Entity.dart';
+import 'package:hasskit/utils/Style.dart';
 
 class SliverListGroupTitle extends StatelessWidget {
   const SliverListGroupTitle({@required this.entities, this.title});

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:hasskit/model/provider_data.dart';
+import 'package:hasskit/model/ProviderData.dart';
 import 'package:hasskit/utils/mdi.class.dart';
-import 'package:hasskit/utils/settings.dart';
-import 'package:hasskit/utils/web_sockets.dart';
+import 'package:hasskit/utils/Settings.dart';
+import 'package:hasskit/utils/WebSocketConnection.dart';
 
 class Entity {
   final String friendlyName;

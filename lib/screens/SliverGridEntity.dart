@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hasskit/model/entity.dart';
-import 'package:hasskit/model/provider_data.dart';
+import 'package:hasskit/model/Entity.dart';
+import 'package:hasskit/model/ProviderData.dart';
 
 import 'EntityButton.dart';
 

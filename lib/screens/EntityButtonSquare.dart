@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hasskit/model/entity.dart';
-import 'package:hasskit/utils/settings.dart';
-import 'package:hasskit/utils/style.dart';
+import 'package:hasskit/model/Entity.dart';
+import 'package:hasskit/utils/Settings.dart';
+import 'package:hasskit/utils/Style.dart';
 
 class EntityButtonSquare extends StatelessWidget {
   final Entity entity;

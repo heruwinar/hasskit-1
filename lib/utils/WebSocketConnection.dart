@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:hasskit/model/provider_data.dart';
+import 'package:hasskit/model/ProviderData.dart';
 import 'package:web_socket_channel/io.dart';
 
 ///

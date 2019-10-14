@@ -3,15 +3,15 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hasskit/Screens/home_tab.dart';
-import 'package:hasskit/Screens/room_tab.dart';
-import 'package:hasskit/Screens/setting_tab.dart';
-import 'package:hasskit/model/provider_data.dart';
-import 'package:hasskit/screens/spinkit.dart';
-import 'package:hasskit/utils/web_sockets.dart';
+import 'package:hasskit/Screens/HomeTab.dart';
+import 'package:hasskit/Screens/RoomTab.dart';
+import 'package:hasskit/Screens/SettingTab.dart';
+import 'package:hasskit/model/ProviderData.dart';
+import 'package:hasskit/screens/SpinKit.dart';
+import 'package:hasskit/utils/WebSocketConnection.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'utils/settings.dart';
+import 'utils/Settings.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([

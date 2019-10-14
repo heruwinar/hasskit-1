@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hasskit/model/provider_data.dart';
-import 'package:hasskit/utils/web_sockets.dart';
+import 'package:hasskit/model/ProviderData.dart';
+import 'package:hasskit/utils/WebSocketConnection.dart';
 import 'package:hasskit/utils/mdi.class.dart';
-import 'package:hasskit/utils/settings.dart';
-import '../utils/style.dart';
+import 'package:hasskit/utils/Settings.dart';
+import '../utils/Style.dart';
 
 class SettingPage extends StatelessWidget {
   @override

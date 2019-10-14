@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hasskit/model/entity.dart';
-import 'package:hasskit/utils/settings.dart';
-import 'package:hasskit/utils/style.dart';
+import 'package:hasskit/model/Entity.dart';
+import 'package:hasskit/utils/Settings.dart';
+import 'package:hasskit/utils/Style.dart';
 
 import 'EntityButtonRectangle.dart';
 import 'EntityButtonSquare.dart';

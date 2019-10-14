@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hasskit/model/provider_data.dart';
-import 'package:hasskit/model/entity.dart';
+import 'package:hasskit/model/ProviderData.dart';
+import 'package:hasskit/model/Entity.dart';
 import 'package:hasskit/screens/SliverGridEntity.dart';
-import 'package:hasskit/utils/settings.dart';
+import 'package:hasskit/utils/Settings.dart';
 import 'SliverListGroupTitle.dart';
 
 class HomeTab extends StatelessWidget {

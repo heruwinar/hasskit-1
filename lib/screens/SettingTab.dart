@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hasskit/screens/setting_page.dart';
+import 'package:hasskit/screens/SettingPage.dart';
 
 class SettingTab extends StatelessWidget {
   @override

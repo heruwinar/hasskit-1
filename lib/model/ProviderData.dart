@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hasskit/model/camera_thumbnail.dart';
+import 'package:hasskit/model/CameraThumbnail.dart';
 import 'dart:collection';
-import 'package:hasskit/model/entity.dart';
-import 'package:hasskit/utils/settings.dart';
-import 'package:hasskit/utils/web_sockets.dart';
+import 'package:hasskit/model/Entity.dart';
+import 'package:hasskit/utils/Settings.dart';
+import 'package:hasskit/utils/WebSocketConnection.dart';
 
 Map<String, List<Entity>> roomMap = {};
 ProviderData providerData;
