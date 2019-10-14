@@ -27,6 +27,13 @@ class EntityButtonSquare extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         decoration: BoxDecoration(
+                          border: entity.entityType == EntityType.others &&
+                                  entity.isIconOn
+                              ? Border.all(
+                                  width: 4,
+                                  color: Styles.entityIconActive,
+                                )
+                              : null,
                           color: entity.entityType == EntityType.others &&
                                   entity.isIconOn
                               ? Colors.green
