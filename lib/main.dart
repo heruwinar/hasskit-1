@@ -118,7 +118,7 @@ class _HassKitHomeState extends State<HassKitHome> with WidgetsBindingObserver {
               return CupertinoTabView(
                 builder: (context) {
                   return CupertinoPageScaffold(
-                    child: RoomTab(),
+                    child: providerData.serverConnected ? RoomTab() : SpinKit(),
                   );
                 },
               );
