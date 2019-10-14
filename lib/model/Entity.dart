@@ -43,7 +43,14 @@ class Entity {
       return false;
     }
     var stateLower = state.toLowerCase();
-    if (['on', 'turning on...', 'open', 'opening...'].contains(stateLower)) {
+    if ([
+      'on',
+      'turning on...',
+      'open',
+      'opening...',
+      'unlocked',
+      'unlocking...'
+    ].contains(stateLower)) {
       return true;
     }
     return false;
@@ -51,7 +58,7 @@ class Entity {
 
   bool get isIconOn {
     var stateLower = state.toLowerCase();
-    if (['on', 'open'].contains(stateLower)) {
+    if (['on', 'open', 'unlocked'].contains(stateLower)) {
       return true;
     }
     return false;
@@ -175,6 +182,13 @@ class Entity {
       state = 'opening...';
       service = 'open_cover';
     }
+    if (state == 'locked' || state == 'locking...') {
+      state = 'unlocking...';
+      service = 'unlock';
+    } else if (state == 'unlocked' || state == 'unlocking...') {
+      state = 'locking...';
+      service = 'lock';
+    }
     var outMsg = {
       "id": providerData.socketId,
       "type": "call_service",
@@ -184,7 +198,7 @@ class Entity {
     };
 
     var outMsgEncoded = json.encode(outMsg);
-//    print('outMsgEncoded $outMsgEncoded');
+    print('outMsgEncoded $outMsgEncoded');
     sockets.send(outMsgEncoded);
 //    print('Toggle: $outMsgEncoded  ${Settings.dTHhMmSS}');
 //    await Future.delayed(const Duration(seconds: 10), () {});
