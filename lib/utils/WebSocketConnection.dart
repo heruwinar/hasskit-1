@@ -205,7 +205,7 @@ class WebSocketConnection with ChangeNotifier {
             send(json.encode(outMsg));
           } else if (id == providerData.socketIdLovelaceConfig) {
             print('Processing Lovelace Config');
-            providerData.socketLovelaceConfig(message);
+            providerData.socketLovelaceConfig(decode);
             outMsg = {
               "id": providerData.socketId,
               "type": "subscribe_events",
@@ -235,7 +235,7 @@ class WebSocketConnection with ChangeNotifier {
           providerData.connectionStatus = 'Connected';
           providerData.serverConnected = true;
 //          print('case event');
-          providerData.socketSubscribeEvents(message);
+          providerData.socketSubscribeEvents(decode);
         }
         break;
       default:

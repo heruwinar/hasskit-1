@@ -156,30 +156,39 @@ class ProviderData with ChangeNotifier {
 
   void socketGetStates(List<dynamic> message) {
     _entities.clear();
-    _entities = message.map((i) => Entity.fromJson(i)).toList();
+    _climates.clear();
 
-    print('_entities.length ${entities.length} == entityCount $entityCount');
+    for (dynamic mess in message) {
+      Entity entity = Entity.fromJson(mess);
+      _entities.add(entity);
+//      print('entity ${entity.entityId} ${entity.friendlyName}');
+      if (entity.entityId.contains('climate.')) {
+        Climate climate = Climate.fromJson(mess);
+        _climates.add(climate);
+      }
+    }
 
-//    int i = 1;
-//    for (Entity entity in entities) {
-//      Entity found = entities.firstWhere((e) => e.entityId == entity.entityId);
-//      print('$i. ${entity.entityId} found ${found.entityId}');
-//      i++;
-//    }
+    print('_entities.length ${entities.length}');
+    print('_climates.length ${_climates.length}');
+
+    int i = 1;
+    for (Climate climate in climates) {
+      print('$i. GetStates climate ${climate.entityId}');
+      i++;
+    }
     notifyListeners();
   }
 
-  void socketLovelaceConfig(String message) {
+  void socketLovelaceConfig(dynamic message) {
     badges.clear();
     cards.clear();
 
-    var decode = json.decode(message);
-    var title = decode['result']['title'];
+    var title = message['result']['title'];
     print('title $title');
     var viewNumber = 0;
     var cardNumber = 0;
 
-    List<dynamic> viewsParse = decode['result']['views'];
+    List<dynamic> viewsParse = message['result']['views'];
     print('viewsParse.length ${viewsParse.length}');
 
     for (var viewParse in viewsParse) {
@@ -294,96 +303,48 @@ class ProviderData with ChangeNotifier {
     }
   }
 
-  void socketSubscribeEvents(String message) {
-    bool isClimate = false;
-    var decode = json.decode(message);
-    var entityId = decode['event']['data']['entity_id'];
-    if (entityId.toString().contains('climate')) {
-      isClimate = true;
-    }
-//    var oldStateEntityId = decode['event']['data']['old_state']['entity_id'];
-//    var oldStateState = decode['event']['data']['old_state']['state'];
-//    var newStateEntityId = decode['event']['data']['new_state']['entity_id'];
-    var newStateState = decode['event']['data']['new_state']['state'];
-    var newIcon = decode['event']['data']['new_state']['attributes']['icon'];
+  void socketSubscribeEvents(dynamic message) {
+    Entity newEntity = Entity.fromJson(message['event']['data']['new_state']);
+    Entity oldEntity = entities.firstWhere(
+        (e) => e != null && e.entityId == newEntity.entityId,
+        orElse: () => null);
 
-//    print('newIcon $entityId : $newIcon');
-
-//    print('socketSubscribeEvents $entityId '
-//        '\noldStateEntityId $oldStateEntityId oldStateState $oldStateState'
-//        '\nnewStateEntityId $newStateEntityId newStateState $newStateState');
-//    print('socketSubscribeEvents $entityId | $oldStateState => $newStateState');
-
-    try {
-      var entity = entities.firstWhere((e) => e.entityId == entityId,
-          orElse: () => null);
-
-      if (entity != null) {
-        entity.state = newStateState;
-        entity.icon = newIcon;
-        notifyListeners();
-      }
-    } catch (e) {
-      print('socketSubscribeEvents Error finding $entityId - $e');
+    if (oldEntity != null) {
+      oldEntity.state = newEntity.state;
+      oldEntity.icon = newEntity.icon;
+      oldEntity.friendlyName = newEntity.friendlyName;
+//      print('Replace old oldEntity ${oldEntity.entityId}');
+    } else {
+      _entities.add(newEntity);
+      print('WTF newEntity ${newEntity.entityId}');
     }
 
-    if (isClimate) {
-//      print('climate $decode');
-
-      var hvacModesParse =
-          decode['event']['data']['old_state']['attributes']['hvac_modes'];
-      List<String> hvacModes = [];
-      for (var hvacMode in hvacModesParse) {
-        hvacModes.add(hvacMode.toString());
-      }
-      var fanModesParse =
-          decode['event']['data']['old_state']['attributes']['hvac_modes'];
-      List<String> fanModes = [];
-      for (var fanMode in fanModesParse) {
-        fanModes.add(fanMode.toString());
-      }
-
-      Climate newClimate;
-      newClimate = Climate(
-        entityId: entityId,
-        state: decode['event']['data']['old_state']['state'],
-        hvacModes: hvacModes,
-        minTemp: double.parse(decode['event']['data']['old_state']['attributes']
-                ['min_temp']
-            .toString()),
-        maxTemp: double.parse(decode['event']['data']['old_state']['attributes']
-                ['max_temp']
-            .toString()),
-        targetTempStep: double.parse(decode['event']['data']['old_state']
-                ['attributes']['target_temp_step']
-            .toString()),
-        temperature: double.parse(decode['event']['data']['old_state']
-                ['attributes']['temperature']
-            .toString()),
-        fanMode: decode['event']['data']['old_state']['attributes']['fan_mode'],
-        fanModes: fanModes,
-        deviceCode: decode['event']['data']['old_state']['attributes']
-            ['device_code'],
-        manufacturer: decode['event']['data']['old_state']['attributes']
-            ['manufacturer'],
-      );
+    if (newEntity != null && newEntity.entityId.contains('climate.')) {
+      Climate newClimate =
+          Climate.fromJson(message['event']['data']['new_state']);
 
       var oldClimate = climates.firstWhere(
-          (e) => e != null && e.entityId == entityId,
+          (e) => e != null && e.entityId == newClimate.entityId,
           orElse: () => null);
 
       if (oldClimate != null) {
-        oldClimate = newClimate;
-        notifyListeners();
-        print(
-            'Replace old climate $entityId state ${newClimate.state} hvacModes ${newClimate.hvacModes.length}');
+        oldClimate.state = newClimate.state;
+        oldClimate.hvacModes = newClimate.hvacModes;
+        oldClimate.minTemp = newClimate.minTemp;
+        oldClimate.maxTemp = newClimate.maxTemp;
+        oldClimate.targetTempStep = newClimate.targetTempStep;
+        oldClimate.temperature = newClimate.temperature;
+        oldClimate.fanMode = newClimate.fanMode;
+        oldClimate.fanModes = newClimate.fanModes;
+        oldClimate.deviceCode = newClimate.deviceCode;
+        oldClimate.manufacturer = newClimate.manufacturer;
+//        print('Replace old oldClimate ${oldClimate.entityId}');
       } else {
         _climates.add(newClimate);
-        print(
-            'Add new climate $entityId state ${newClimate.state} hvacModes ${newClimate.hvacModes.length}');
-        notifyListeners();
+        print('WTF newClimate ${newClimate.entityId}');
       }
     }
+    notifyListeners();
   }
 
   bool _loadingData = false;

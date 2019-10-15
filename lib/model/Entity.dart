@@ -20,14 +20,6 @@ class Entity {
   });
 
   factory Entity.fromJson(Map<String, dynamic> json) {
-//    String iconString = json['attributes']['icon'];
-//    String friendlyName =
-//        json['attributes']['friendly_name'] ?? 'friendly_name ???';
-//    String entityId = json['entity_id'] ?? 'entity_id ???';
-//    String state = json['state'] ?? 'on';
-
-//    print(
-//        'Entity.fromJson iconString $iconString friendlyName $friendlyName entityId $entityId state $state');
     return Entity(
       icon: json['attributes']['icon'],
       friendlyName: json['attributes']['friendly_name'],
