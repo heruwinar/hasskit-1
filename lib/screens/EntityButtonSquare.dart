@@ -56,24 +56,22 @@ class EntityButtonSquare extends StatelessWidget {
                 ),
                 Expanded(
                   child: FittedBox(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: entity.state.contains('...')
-                          ? SpinKitThreeBounce(
-                              color: entity.isBackgroundOn == true
-                                  ? Styles.entityIconActive
-                                  : Styles.entityIconInActive,
-                              size: 100,
-                            )
-                          : !providerData.serverConnected
-                              ? SpinKitFadingCircle(
-                                  color: entity.isBackgroundOn == true
-                                      ? Styles.entityIconActive
-                                      : Styles.entityIconInActive,
-                                  size: 100,
-                                )
-                              : Container(),
-                    ),
+                    alignment: Alignment.centerRight,
+                    child: entity.state.contains('...')
+                        ? SpinKitThreeBounce(
+                            color: entity.isBackgroundOn == true
+                                ? Styles.entityIconActive
+                                : Styles.entityIconInActive,
+                            size: 100,
+                          )
+                        : !providerData.serverConnected
+                            ? SpinKitFadingCircle(
+                                color: entity.isBackgroundOn == true
+                                    ? Styles.entityIconActive
+                                    : Styles.entityIconInActive,
+                                size: 100,
+                              )
+                            : Container(),
                   ),
                 ),
               ],

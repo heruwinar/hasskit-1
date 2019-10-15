@@ -7,7 +7,7 @@ import 'package:hasskit/utils/Settings.dart';
 import 'package:hasskit/utils/WebSocketConnection.dart';
 
 class Entity {
-  final String friendlyName;
+  String friendlyName;
   String icon;
   final String entityId;
   String state;
@@ -42,6 +42,7 @@ class Entity {
         entityType != EntityType.mediaPlayers) {
       return false;
     }
+
     var stateLower = state.toLowerCase();
     if ([
       'on',
@@ -53,6 +54,10 @@ class Entity {
     ].contains(stateLower)) {
       return true;
     }
+
+    if (entityId.split('.')[0] == 'climate' && state.toLowerCase() != 'off') {
+      return true;
+    }
     return false;
   }
 
@@ -61,11 +66,18 @@ class Entity {
     if (['on', 'open', 'unlocked'].contains(stateLower)) {
       return true;
     }
+
+    if (entityId.split('.')[0] == 'climate' && state.toLowerCase() != 'off') {
+      return true;
+    }
     return false;
   }
 
   String get getDefaultIcon {
-    //not null or empty
+    if (entityId.contains('lock.') && isIconOn) {
+      return 'mdi:lock-open';
+    }
+
     if (!["", null].contains(icon)) {
       return icon;
     }
@@ -133,7 +145,7 @@ class Entity {
   Map<String, String> iconOverrider = {
     'automation': 'mdi:home-automation',
     'camera': 'mdi:camera',
-    'climate': 'mdi:air-conditioner',
+    'climate': 'mdi:thermostat',
     'cover': 'mdi:garage',
     'fan': 'mdi:fan',
     'group': 'mdi:group',
@@ -168,7 +180,9 @@ class Entity {
   toggleState() {
     var domain = entityId.split('.').first;
     var service = '';
-    if (state == 'on' || state == 'turning on...') {
+    if (state == 'on' ||
+        state == 'turning on...' ||
+        domain == 'climate' && state != 'off') {
       state = 'turning off...';
       service = 'turn_off';
     } else if (state == 'off' || state == 'turning off...') {

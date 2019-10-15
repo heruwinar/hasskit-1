@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hasskit/model/CameraThumbnail.dart';
+import 'package:hasskit/model/Climate.dart';
 import 'dart:collection';
 import 'package:hasskit/model/Entity.dart';
 import 'package:hasskit/utils/Settings.dart';
@@ -13,6 +14,7 @@ ProviderData providerData;
 
 class ProviderData with ChangeNotifier {
   List<Entity> _entities = [];
+  List<Climate> _climates = [];
 
   int socketIdGetStates;
 
@@ -22,6 +24,10 @@ class ProviderData with ChangeNotifier {
 
   UnmodifiableListView<Entity> get entities {
     return UnmodifiableListView(_entities);
+  }
+
+  UnmodifiableListView<Climate> get climates {
+    return UnmodifiableListView(_climates);
   }
 
   int get entityCount {
@@ -289,8 +295,12 @@ class ProviderData with ChangeNotifier {
   }
 
   void socketSubscribeEvents(String message) {
+    bool isClimate = false;
     var decode = json.decode(message);
     var entityId = decode['event']['data']['entity_id'];
+    if (entityId.toString().contains('climate')) {
+      isClimate = true;
+    }
 //    var oldStateEntityId = decode['event']['data']['old_state']['entity_id'];
 //    var oldStateState = decode['event']['data']['old_state']['state'];
 //    var newStateEntityId = decode['event']['data']['new_state']['entity_id'];
@@ -315,6 +325,64 @@ class ProviderData with ChangeNotifier {
       }
     } catch (e) {
       print('socketSubscribeEvents Error finding $entityId - $e');
+    }
+
+    if (isClimate) {
+//      print('climate $decode');
+
+      var hvacModesParse =
+          decode['event']['data']['old_state']['attributes']['hvac_modes'];
+      List<String> hvacModes = [];
+      for (var hvacMode in hvacModesParse) {
+        hvacModes.add(hvacMode.toString());
+      }
+      var fanModesParse =
+          decode['event']['data']['old_state']['attributes']['hvac_modes'];
+      List<String> fanModes = [];
+      for (var fanMode in fanModesParse) {
+        fanModes.add(fanMode.toString());
+      }
+
+      Climate newClimate;
+      newClimate = Climate(
+        entityId: entityId,
+        state: decode['event']['data']['old_state']['state'],
+        hvacModes: hvacModes,
+        minTemp: double.parse(decode['event']['data']['old_state']['attributes']
+                ['min_temp']
+            .toString()),
+        maxTemp: double.parse(decode['event']['data']['old_state']['attributes']
+                ['max_temp']
+            .toString()),
+        targetTempStep: double.parse(decode['event']['data']['old_state']
+                ['attributes']['target_temp_step']
+            .toString()),
+        temperature: double.parse(decode['event']['data']['old_state']
+                ['attributes']['temperature']
+            .toString()),
+        fanMode: decode['event']['data']['old_state']['attributes']['fan_mode'],
+        fanModes: fanModes,
+        deviceCode: decode['event']['data']['old_state']['attributes']
+            ['device_code'],
+        manufacturer: decode['event']['data']['old_state']['attributes']
+            ['manufacturer'],
+      );
+
+      var oldClimate = climates.firstWhere(
+          (e) => e != null && e.entityId == entityId,
+          orElse: () => null);
+
+      if (oldClimate != null) {
+        oldClimate = newClimate;
+        notifyListeners();
+        print(
+            'Replace old climate $entityId state ${newClimate.state} hvacModes ${newClimate.hvacModes.length}');
+      } else {
+        _climates.add(newClimate);
+        print(
+            'Add new climate $entityId state ${newClimate.state} hvacModes ${newClimate.hvacModes.length}');
+        notifyListeners();
+      }
     }
   }
 
