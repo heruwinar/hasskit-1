@@ -1,4 +1,3 @@
-
 class Climate {
   final String entityId;
   String state;
@@ -32,7 +31,9 @@ class Climate {
     List<String> hvacModes = [];
     for (String hvac_mode in json['attributes']['hvac_modes']) {
       hvacModes.add(hvac_mode);
+      print('hvac_mode $hvac_mode');
     }
+
     List<String> fanModes = [];
     for (String fan_mode in json['attributes']['fan_modes']) {
       fanModes.add(fan_mode);

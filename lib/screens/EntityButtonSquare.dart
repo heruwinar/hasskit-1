@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hasskit/model/Entity.dart';
-import 'package:hasskit/model/ProviderData.dart';
 import 'package:hasskit/utils/Settings.dart';
 import 'package:hasskit/utils/Style.dart';
 
@@ -35,10 +33,7 @@ class EntityButtonSquare extends StatelessWidget {
                                   color: Styles.entityIconActive,
                                 )
                               : null,
-                          color: entity.entityType == EntityType.others &&
-                                  entity.isIconOn
-                              ? Colors.green
-                              : Colors.transparent,
+                          color: entity.iconBackgroundColor,
                           borderRadius: BorderRadius.circular(16),
                         ),
                         width: 100,
@@ -47,32 +42,13 @@ class EntityButtonSquare extends StatelessWidget {
                       Icon(
                         entity.mdiIcon,
                         size: 100,
-                        color: entity.isIconOn == true
-                            ? Styles.entityIconActive
-                            : Styles.entityIconInActive,
+                        color: entity.iconColor,
                       ),
                     ],
                   ),
                 ),
                 Expanded(
-                  child: FittedBox(
-                    alignment: Alignment.centerRight,
-                    child: entity.state.contains('...')
-                        ? SpinKitThreeBounce(
-                            color: entity.isBackgroundOn == true
-                                ? Styles.entityIconActive
-                                : Styles.entityIconInActive,
-                            size: 100,
-                          )
-                        : !providerData.serverConnected
-                            ? SpinKitFadingCircle(
-                                color: entity.isBackgroundOn == true
-                                    ? Styles.entityIconActive
-                                    : Styles.entityIconInActive,
-                                size: 100,
-                              )
-                            : Container(),
-                  ),
+                  child: entity.topRightWidget,
                 ),
               ],
             ),

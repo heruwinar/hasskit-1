@@ -26,6 +26,19 @@ abstract class Styles {
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
   );
+  static const TextStyle textEntityDegreeActive = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 0.8),
+    fontSize: 24,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle textEntityDegreeInActive = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 0.5),
+    fontSize: 24,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+  );
 
   static const TextStyle textEntityStatus = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 0.5),
@@ -72,6 +85,10 @@ abstract class Styles {
   static const Color amber700 = Color(0xFFFFA000);
   static const Color amber800 = Color(0xFFFF8F00);
   static const Color amber900 = Color(0xFFFF6F00);
+
+  static const Color greed500 = Color(0xFF4CAF50);
+
+  static const Color red500 = Color(0xFFF44336);
 
   static const Color white20 = Color.fromRGBO(255, 255, 255, 0.2);
   static const Color white50 = Color.fromRGBO(255, 255, 255, 0.5);

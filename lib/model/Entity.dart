@@ -1,10 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hasskit/model/Climate.dart';
 import 'package:hasskit/model/ProviderData.dart';
 import 'package:hasskit/utils/mdi.class.dart';
 import 'package:hasskit/utils/Settings.dart';
 import 'package:hasskit/utils/WebSocketConnection.dart';
+
+import '../utils/Style.dart';
 
 class Entity {
   String friendlyName;
@@ -234,5 +239,69 @@ class Entity {
     } else {
       return EntityType.others;
     }
+  }
+
+  Color get iconColor {
+    if (isIconOn) {
+      if (entityId.contains('climate.')) {
+        if (state.contains('heat')) {
+          return Styles.red500;
+        } else if (state.contains('cool')) {
+          return Styles.greed500;
+        }
+      }
+      return Styles.entityIconActive;
+    }
+
+    return Styles.entityIconInActive;
+  }
+
+  Color get iconBackgroundColor {
+    if (isIconOn && entityType == EntityType.others) {
+      return Styles.greed500;
+    }
+
+    return Colors.transparent;
+  }
+
+  Widget get topRightWidget {
+    if (!providerData.serverConnected) {
+      return FittedBox(
+        alignment: Alignment.centerRight,
+        child: SpinKitFadingCircle(
+          color: Styles.white50,
+          size: 100,
+        ),
+      );
+    }
+    if (state.contains('...')) {
+      return FittedBox(
+        alignment: Alignment.centerRight,
+        child: SpinKitThreeBounce(
+          color: iconColor,
+          size: 100,
+        ),
+      );
+    }
+    if (entityId.contains('climate')) {
+      Climate climate = providerData.climates.firstWhere(
+          (e) => e != null && e.entityId == entityId,
+          orElse: () => null);
+
+      if (climate != null) {
+        return Align(
+          alignment: Alignment.centerRight,
+          child: Text(
+            '${climate.temperature}°',
+            style: isIconOn
+                ? Styles.textEntityDegreeInActive
+                : Styles.textEntityDegreeInActive,
+            overflow: TextOverflow.ellipsis,
+            textScaleFactor: Settings.textScaleFactor,
+          ),
+        );
+      }
+    }
+    return Container();
   }
 }
